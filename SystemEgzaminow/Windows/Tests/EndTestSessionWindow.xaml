@@ -1,0 +1,237 @@
+﻿<Window x:Class="SystemEgzaminow.WPF.Windows.Tests.EndTestSessionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Zakończenie testu"
+        Width="900"
+        Height="550"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <StackPanel Grid.Row="0"
+                    Margin="0,0,0,20">
+
+            <TextBlock Text="Zakończenie testu"
+                       FontSize="26"
+                       FontWeight="SemiBold" />
+
+            <TextBlock Text="Twoje odpowiedzi zostały zapisane."
+                       Margin="0,6,0,0"
+                       FontSize="14" />
+        </StackPanel>
+
+        <!-- Główna część -->
+        <Border Grid.Row="1"
+                Padding="24"
+                BorderBrush="#D1D5DB"
+                BorderThickness="1"
+                CornerRadius="10">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Informacja o zakończeniu -->
+                <StackPanel Grid.Column="0"
+                            VerticalAlignment="Center">
+
+                    <TextBlock Text="Test został zakończony"
+                               FontSize="22"
+                               FontWeight="SemiBold"
+                               TextAlignment="Center" />
+
+                    <TextBlock x:Name="CompletionMessageTextBlock"
+                               Text="Test został pomyślnie wysłany. Dziękujemy za jego rozwiązanie."
+                               Margin="20,16,20,0"
+                               FontSize="15"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+
+                <Border Grid.Column="1"
+                        Width="1"
+                        Background="#D1D5DB"
+                        Margin="14,0" />
+
+                <!-- Sekcja wyników -->
+                <Grid Grid.Column="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Border x:Name="ResultsBorder"
+               Grid.Row="0"
+                 Padding="20"
+                 BorderBrush="#D1D5DB"
+                 BorderThickness="1"
+                    CornerRadius="8">
+
+                    <StackPanel>
+                        <TextBlock Text="Wynik testu"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,18" />
+
+                        <!-- Punkty -->
+                        <Grid x:Name="PointsResultRow"
+                              Margin="0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Liczba punktów:"
+                                       FontWeight="SemiBold" />
+
+                            <TextBlock x:Name="PointsResultTextBlock"
+                                       Grid.Column="1"
+                                       Text="18 / 20" />
+                        </Grid>
+
+                        <!-- Procent -->
+                        <Grid x:Name="PercentageResultRow"
+                              Margin="0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Wynik procentowy:"
+                                       FontWeight="SemiBold" />
+
+                            <TextBlock x:Name="PercentageResultTextBlock"
+                                       Grid.Column="1"
+                                       Text="90%" />
+                        </Grid>
+
+                        <!-- Ocena -->
+                        <Grid x:Name="GradeResultRow"
+                              Margin="0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Ocena:"
+                                       FontWeight="SemiBold" />
+
+                            <TextBlock x:Name="GradeResultTextBlock"
+                                       Grid.Column="1"
+                                       Text="5" />
+                        </Grid>
+
+                        <!-- Zaliczenie -->
+                        <Grid x:Name="PassedResultRow"
+                              Margin="0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="Status:"
+                                       FontWeight="SemiBold" />
+
+                            <TextBlock x:Name="PassedResultTextBlock"
+                                       Grid.Column="1"
+                                       Text="Zaliczony"
+                                       FontWeight="SemiBold" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Komunikat zamiast wyników -->
+                <Border x:Name="HiddenResultsBorder"
+                       Grid.Row="0"
+                        Padding="20"
+                        BorderBrush="#D1D5DB"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Visibility="Collapsed">
+
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Wynik został zapisany"
+                                   FontSize="19"
+                                   FontWeight="SemiBold"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+
+                        <TextBlock Text="Szczegóły wyniku nie są wyświetlane zgodnie z ustawieniami nauczyciela."
+                                   Margin="10,14,10,0"
+                                   FontSize="14"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap" />
+                    </StackPanel>
+                </Border>
+
+                    <Border x:Name="AnswersBorder"
+        Grid.Row="1"
+        Margin="0,12,0,0"
+        Padding="20"
+        BorderBrush="#D1D5DB"
+        BorderThickness="1"
+        CornerRadius="8"
+        Visibility="Collapsed">
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl x:Name="AnswersItemsControl">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Margin="0,0,0,16">
+
+                                            <TextBlock Text="{Binding TrescPytania}"
+                     FontWeight="SemiBold"
+                     TextWrapping="Wrap" />
+
+                                            <TextBlock Margin="0,4,0,8"
+                     Text="{Binding LiczbaPunktowZdobytych, StringFormat=Zdobyte punkty: {0}}" />
+
+                                            <ItemsControl ItemsSource="{Binding Odpowiedzi}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Margin="12,2,0,2">
+
+                                                            <TextBlock Text="{Binding TrescOdpowiedzi}"
+                                     TextWrapping="Wrap" />
+
+                                                            <TextBlock Text="{Binding CzyWybranaPrzezUcznia, StringFormat=Wybrana przez ucznia: {0}}"
+                                     FontSize="12" />
+
+                                                            <TextBlock Text="{Binding CzyPoprawna, StringFormat=Poprawna: {0}}"
+                                     FontSize="12" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Przycisk -->
+        <Button x:Name="CloseButton"
+                Grid.Row="2"
+                Content="Zamknij"
+                Width="130"
+                Height="42"
+                Margin="0,20,0,0"
+                HorizontalAlignment="Center"
+                IsDefault="True" Click="CloseButton_Click" />
+    </Grid>
+</Window>

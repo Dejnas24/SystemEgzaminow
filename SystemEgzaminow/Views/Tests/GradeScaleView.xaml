@@ -1,0 +1,147 @@
+﻿<UserControl x:Class="SystemEgzaminow.WPF.Views.Tests.GradeScaleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SystemEgzaminow.WPF.Views.Tests"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="GradeScaleView_Loaded">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Skala ocen"
+                   FontSize="26"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20" />
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,20">
+
+            <TextBlock Text="Typ testu:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,5,0" />
+
+            <ComboBox x:Name="TestTypeBox"
+                      Width="180"
+                      Margin="0,0,20,0"
+                      SelectionChanged="TestTypeBox_SelectionChanged" />
+
+            <TextBlock Text="Nazwa skali:"
+           VerticalAlignment="Center"
+           Margin="0,0,5,0" />
+
+            <TextBox x:Name="ScaleNameBox"
+         Width="220"
+         Height="26" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2"
+                    Width="700"
+                    HorizontalAlignment="Center">
+
+            <Grid Margin="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="160" />
+                    <ColumnDefinition Width="160" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Ocena"
+                           FontWeight="Bold" />
+
+                <TextBlock Grid.Column="1"
+                           Text="Próg od"
+                           FontWeight="Bold" />
+
+                <TextBlock Grid.Column="2"
+                           Text="Próg do"
+                           FontWeight="Bold" />
+            </Grid>
+
+            <ItemsControl x:Name="ThresholdsItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="160" />
+                                <ColumnDefinition Width="160" />
+                                <ColumnDefinition Width="120" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="0"
+                                     Text="{Binding Ocena, UpdateSourceTrigger=PropertyChanged}"
+                                     Margin="0,0,10,0" />
+
+                            <TextBox Grid.Column="1"
+                                     Text="{Binding ProgOd}"
+                                     IsReadOnly="True"
+                                     Margin="0,0,10,0" />
+
+                            <TextBox Grid.Column="2"
+                                     Text="{Binding ProgDo, UpdateSourceTrigger=PropertyChanged}"
+                                     TextChanged="ProgDo_TextChanged"
+                                     Margin="0,0,10,0" />
+
+                            <Button Grid.Column="3"
+                                    Content="Usuń"
+                                    Width="80"
+                                    Height="28"
+                                    Click="DeleteThreshold_Click" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <Button x:Name="AddThresholdButton"
+                Content="+ Dodaj kolejny próg oceny"
+                    Width="200"
+                    Height="36"
+                    HorizontalAlignment="Left"
+                    Margin="0,15,0,0"
+                    Click="AddThreshold_Click" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="3"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0">
+
+            <Button x:Name="CreateIndividualButton"
+        Content="Utwórz własną skalę"
+        Width="180"
+        Height="45"
+        Margin="10"
+        Click="CreateIndividual_Click" />
+            <Button x:Name="SaveButton"
+                Content="Zapisz"
+                    Width="150"
+                    Height="45"
+                    Margin="10"
+                    Click="Save_Click" />
+
+            <Button x:Name="RestoreDefaultButton"
+                    Content="Przywróć domyślną"
+                    Width="180"
+                    Height="45"
+                    Margin="10"
+                    Click="RestoreDefault_Click" />
+
+            <Button Content="Wróć"
+                    Width="150"
+                    Height="45"
+                    Margin="10"
+                    Click="Back_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>

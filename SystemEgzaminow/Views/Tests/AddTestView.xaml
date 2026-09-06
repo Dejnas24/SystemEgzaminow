@@ -1,0 +1,596 @@
+﻿<UserControl x:Class="SystemEgzaminow.WPF.Views.Tests.AddTestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SystemEgzaminow.WPF.Views.Tests"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto">
+
+        <Grid Margin="25">
+
+            <Grid.RowDefinitions>
+                <!-- Nagłówek -->
+                <RowDefinition Height="Auto" />
+
+                <!-- Tytuł i typ -->
+                <RowDefinition Height="Auto" />
+
+                <!-- Opis -->
+                <RowDefinition Height="Auto" />
+
+                <!-- Ustawienia -->
+                <RowDefinition Height="Auto" />
+
+                <!-- Przyciski pytań -->
+                <RowDefinition Height="Auto" />
+
+                <!-- Licznik -->
+                <RowDefinition Height="Auto" />
+
+                <!-- Tabela -->
+                <RowDefinition Height="*" />
+
+                <!-- Zapisz / Anuluj -->
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Nagłówek -->
+            <TextBlock x:Name="ViewTitleTextBlock"
+                   Grid.Row="0"
+                   Text="Dodaj test"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,10,0,25" />
+
+            <!-- Tytuł testu i typ -->
+            <Grid Grid.Row="1"
+              Margin="0,0,0,18">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="210" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                       Text="Tytuł testu:"
+                       FontSize="17"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"
+                       Margin="0,0,12,0" />
+
+                <TextBox x:Name="TitleTextBox"
+                     Grid.Column="1"
+                     Height="42"
+                     FontSize="16"
+                     Padding="8,4"
+                     VerticalContentAlignment="Center"
+                     MaxLength="200" />
+
+                <TextBlock Grid.Column="3"
+                       Text="Typ testu:"
+                       FontSize="17"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"
+                       Margin="0,0,12,0" />
+
+                <ComboBox x:Name="TestTypeComboBox"
+                      Grid.Column="4"
+                      Height="42"
+                      FontSize="16"
+                      Padding="6,3"
+                      VerticalContentAlignment="Center"
+                      DisplayMemberPath="NazwaTypu"
+                      SelectedValuePath="Id" />
+            </Grid>
+
+            <!-- Opis testu -->
+            <Grid Grid.Row="2"
+              Margin="0,0,0,18">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="8" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                       Text="Opis testu (opcjonalnie):"
+                       FontSize="17"
+                       FontWeight="SemiBold" />
+
+                <TextBox x:Name="DescriptionTextBox"
+                     Grid.Row="2"
+                     Height="85"
+                     FontSize="15"
+                     Padding="8"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"
+                     MaxLength="2000" />
+            </Grid>
+
+            <!-- Ustawienia testu -->
+            <Grid Grid.Row="3"
+              Margin="0,0,0,18">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="135" />
+                    <ColumnDefinition Width="35" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="135" />
+                    <ColumnDefinition Width="55" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Próg zdania -->
+                <TextBlock Grid.Column="0"
+                       Text="Próg zdania:"
+                       FontSize="17"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"
+                       Margin="0,0,10,0" />
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="PassThresholdTextBox"
+                         Grid.Column="0"
+                         Height="40"
+                         FontSize="16"
+                         TextAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         MaxLength="3" />
+
+                    <TextBlock Grid.Column="1"
+                           Text="%"
+                           FontSize="16"
+                           VerticalAlignment="Center"
+                           Margin="7,0,0,0" />
+                </Grid>
+
+                <!-- Czas trwania -->
+                <TextBlock Grid.Column="3"
+                       Text="Czas trwania:"
+                       FontSize="17"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"
+                       Margin="0,0,10,0" />
+
+                <Grid Grid.Column="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="DurationTextBox"
+                         Grid.Column="0"
+                         Height="40"
+                         FontSize="16"
+                         TextAlignment="Center"
+                         VerticalContentAlignment="Center"
+                         MaxLength="4" />
+
+                    <TextBlock Grid.Column="1"
+                           Text="min"
+                           FontSize="16"
+                           VerticalAlignment="Center"
+                           Margin="7,0,0,0" />
+                </Grid>
+
+                <!-- Losowanie -->
+                <StackPanel Grid.Column="6"
+                        Margin="20,0,0,0"
+                        VerticalAlignment="Center">
+
+                    <CheckBox x:Name="RandomizeQuestionsCheckBox"
+                          Content="Losuj kolejność pytań"
+                          FontSize="16"
+                          Margin="0,0,0,9" />
+
+                    <CheckBox x:Name="RandomizeAnswersCheckBox"
+                          Content="Losuj kolejność odpowiedzi"
+                          FontSize="16" />
+                </StackPanel>
+            </Grid>
+
+            <!-- Licznik pytań -->
+            <StackPanel Grid.Row="4"
+            Orientation="Horizontal"
+            Margin="0,0,0,10">
+
+                <TextBlock Text="Liczba pytań:"
+               FontSize="16"
+               FontWeight="SemiBold"
+               VerticalAlignment="Center" />
+
+                <TextBlock x:Name="QuestionsCountTextBlock"
+               Text="0"
+               FontSize="16"
+               FontWeight="Bold"
+               VerticalAlignment="Center"
+               Margin="8,0,0,0" />
+            </StackPanel>
+
+            <!-- Bloki pytań przypisanych do testu -->
+            <ItemsControl x:Name="AssignedQuestionsItemsControl"
+              Grid.Row="5"
+              Margin="0,0,0,15">
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+
+                        <!-- Pojedynczy blok pytania -->
+                        <Border BorderBrush="#A0A0A0"
+                    BorderThickness="1"
+                    Padding="14"
+                    Margin="0,0,0,14">
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Nagłówek pytania -->
+                                <Grid Grid.Row="0"
+                          Margin="0,0,0,10">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0"
+                                    Orientation="Horizontal"
+                                    VerticalAlignment="Center">
+
+                                        <TextBlock Text="Pytanie "
+                                       FontSize="16"
+                                       FontWeight="SemiBold" />
+
+                                        <TextBlock Text="{Binding NumerPytania}"
+                                       FontSize="16"
+                                       FontWeight="SemiBold" />
+
+                                        <TextBlock Text=" z "
+                                       FontSize="16"
+                                       FontWeight="SemiBold" />
+
+                                        <TextBlock Text="{Binding LiczbaWszystkichPytan}"
+                                       FontSize="16"
+                                       FontWeight="SemiBold" />
+
+                                        <TextBlock Text="     "
+                                       FontSize="16" />
+
+                                        <TextBlock Text="{Binding TypPytaniaTekst}"
+                                       FontSize="16"
+                                       FontWeight="SemiBold" />
+
+                                        <TextBlock Text="     Liczba punktów: "
+                                       FontSize="16"
+                                       FontWeight="SemiBold" />
+
+                                        <TextBlock Text="{Binding LiczbaPunktow}"
+                                       FontSize="16"
+                                       FontWeight="Bold" />
+                                    </StackPanel>
+
+                                    <!-- Zmiana kolejności i usuwanie -->
+                                    <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal">
+
+                                        <Button Content="↑"
+                                    Width="38"
+                                    Height="30"
+                                    Margin="3,0"
+                                    ToolTip="Przesuń pytanie wyżej"
+                                    IsEnabled="{Binding CzyMoznaPrzesunacWGore}"
+                                    Click="MoveQuestionUpButton_Click" />
+
+                                        <Button Content="↓"
+                                    Width="38"
+                                    Height="30"
+                                    Margin="3,0"
+                                    ToolTip="Przesuń pytanie niżej"
+                                    IsEnabled="{Binding CzyMoznaPrzesunacWDol}"
+                                    Click="MoveQuestionDownButton_Click" />
+
+                                        <Button Content="✕"
+                                    Width="38"
+                                    Height="30"
+                                    Margin="3,0"
+                                    ToolTip="Usuń pytanie z testu"
+                                    Click="RemoveQuestionFromTestButton_Click" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Treść pytania i opcjonalne zdjęcie -->
+                                <Grid Grid.Row="1"
+                          Margin="0,0,0,12">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="15" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackPanel Grid.Column="0">
+
+                                        <TextBlock Text="Treść pytania:"
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,5" />
+
+                                        <TextBlock Text="{Binding TrescPytania}"
+                                       FontSize="15"
+                                       TextWrapping="Wrap" />
+                                    </StackPanel>
+
+                                    <!-- Zdjęcie znika całkowicie, gdy go nie ma -->
+                                    <Border Grid.Column="2"
+                                Width="190"
+                                Height="125"
+                                BorderBrush="#A0A0A0"
+                                BorderThickness="1"
+                                Padding="5">
+
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Visibility"
+                                            Value="Visible" />
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CzyMaZdjecie}"
+                                                     Value="False">
+                                                        <Setter Property="Visibility"
+                                                    Value="Collapsed" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+
+                                        <Image Source="{Binding SciezkaZdjecia, TargetNullValue={x:Null},
+                        FallbackValue={x:Null}}"
+                                   Stretch="Uniform" />
+                                    </Border>
+                                </Grid>
+
+                                <!-- Odpowiedzi -->
+                                <Grid Grid.Row="2">
+
+                                    <!-- Pytanie jednokrotnego wyboru -->
+                                    <StackPanel>
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility"
+                                            Value="Collapsed" />
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CzyJednokrotnyWybor}"
+                                                     Value="True">
+                                                        <Setter Property="Visibility"
+                                                    Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+
+                                        <TextBlock Text="Odpowiedzi"
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,6" />
+
+                                        <ItemsControl ItemsSource="{Binding Odpowiedzi}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+
+                                                    <Grid Margin="0,3">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="35" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="100" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <RadioButton Grid.Column="0"
+                                                         IsChecked="{Binding CzyPoprawna}"
+                                                         IsEnabled="False"
+                                                         VerticalAlignment="Center" />
+
+                                                        <TextBlock Grid.Column="1"
+                                                       Text="{Binding TrescOdpowiedzi}"
+                                                       FontSize="15"
+                                                       TextWrapping="Wrap"
+                                                       VerticalAlignment="Center" />
+
+                                                        <TextBlock Grid.Column="2"
+                                                       Text="{Binding LiczbaPunktow}"
+                                                       FontSize="15"
+                                                       TextAlignment="Center"
+                                                       VerticalAlignment="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+
+                                    <!-- Pytanie wielokrotnego wyboru -->
+                                    <StackPanel>
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility"
+                                            Value="Collapsed" />
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CzyWielokrotnyWybor}"
+                                                     Value="True">
+                                                        <Setter Property="Visibility"
+                                                    Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+
+                                        <Grid Margin="0,0,0,6">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="100" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Column="0"
+                                           Text="Odpowiedzi"
+                                           FontSize="15"
+                                           FontWeight="SemiBold" />
+
+                                            <TextBlock Grid.Column="1"
+                                           Text="Punkty"
+                                           FontSize="15"
+                                           FontWeight="SemiBold"
+                                           TextAlignment="Center" />
+                                        </Grid>
+
+                                        <ItemsControl ItemsSource="{Binding Odpowiedzi}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+
+                                                    <Grid Margin="0,3">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="35" />
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="100" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <CheckBox Grid.Column="0"
+                                                      IsChecked="{Binding CzyPoprawna}"
+                                                      IsEnabled="False"
+                                                      VerticalAlignment="Center" />
+
+                                                        <TextBlock Grid.Column="1"
+                                                       Text="{Binding TrescOdpowiedzi}"
+                                                       FontSize="15"
+                                                       TextWrapping="Wrap"
+                                                       VerticalAlignment="Center" />
+
+                                                        <TextBlock Grid.Column="2"
+                                                       Text="{Binding LiczbaPunktow}"
+                                                       FontSize="15"
+                                                       TextAlignment="Center"
+                                                       VerticalAlignment="Center" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+
+                                    <!-- Pytanie otwarte -->
+                                    <StackPanel>
+                                        <StackPanel.Style>
+                                            <Style TargetType="StackPanel">
+                                                <Setter Property="Visibility"
+                                            Value="Collapsed" />
+
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding CzyOtwarte}"
+                                                     Value="True">
+                                                        <Setter Property="Visibility"
+                                                    Value="Visible" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </StackPanel.Style>
+
+                                        <TextBlock Text="Odpowiedź wzorcowa:"
+                                       FontSize="15"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,6" />
+
+                                        <TextBox Text="{Binding OdpowiedzWzorcowa}"
+                                     IsReadOnly="True"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                     MinHeight="70"
+                                     Padding="7" />
+
+                                        <TextBlock Text="Podczas sprawdzania system porówna odpowiedź ucznia z odpowiedzią wzorcową."
+                                       FontSize="13"
+                                       FontStyle="Italic"
+                                       Foreground="Gray"
+                                       Margin="0,7,0,0" />
+                                    </StackPanel>
+                                </Grid>
+
+                                <!-- Linia oddzielająca pytania -->
+                                <Separator Grid.Row="3"
+                               Margin="0,14,0,0" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Przyciski dodawania kolejnych pytań -->
+            <Grid Grid.Row="6"
+      Margin="0,0,0,12">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="12" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="AssignExistingQuestionButton"
+            Grid.Column="0"
+            Content="+ Przypisz kolejne pytanie"
+            Width="225"
+            Height="45"
+            FontSize="15"
+            Click="AssignExistingQuestionButton_Click" />
+
+                <Button x:Name="AddNewQuestionButton"
+            Grid.Column="2"
+            Content="Dodaj nowe pytanie"
+            Width="190"
+            Height="45"
+            FontSize="15"
+            Click="AddNewQuestionButton_Click" />
+            </Grid>
+
+            <!-- Przyciski końcowe -->
+            <StackPanel Grid.Row="7"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+                <Button x:Name="SaveTestButton"
+                    Content="Zapisz test"
+                    Width="170"
+                    Height="48"
+                    FontSize="16"
+                    Margin="8"
+                    Click="SaveTestButton_Click" />
+
+                <Button x:Name="CancelButton"
+                    Content="Anuluj"
+                    Width="170"
+                    Height="48"
+                    FontSize="16"
+                    Margin="8"
+                    Click="CancelButton_Click" />
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

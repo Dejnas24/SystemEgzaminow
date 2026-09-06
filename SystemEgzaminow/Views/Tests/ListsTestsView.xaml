@@ -1,0 +1,343 @@
+﻿<UserControl x:Class="SystemEgzaminow.WPF.Views.Tests.ListsTestsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SystemEgzaminow.WPF.Views.Tests"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="ListTest_Loaded">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <TextBlock Grid.Row="0"
+                   Text="Lista testów"
+                   FontSize="26"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20" />
+
+        <!-- Filtry -->
+        <Grid Grid.Row="1"
+      HorizontalAlignment="Center"
+      Margin="0,0,0,10">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Autor -->
+            <StackPanel x:Name="AuthorFilterPanel"
+                Grid.Column="0"
+                Orientation="Horizontal">
+
+                <TextBlock Text="Autor:"
+                   VerticalAlignment="Center"
+                   Margin="0,0,8,0" />
+
+                <ComboBox x:Name="AuthorFilterBox"
+                  Width="160" SelectionChanged="AuthorFilterBox_SelectionChanged" />
+            </StackPanel>
+
+            <!-- Typ testu -->
+            <StackPanel Grid.Column="2"
+                Orientation="Horizontal">
+
+                <TextBlock Text="Typ:"
+                   VerticalAlignment="Center"
+                   Margin="0,0,8,0" />
+
+                <ComboBox x:Name="TestTypeFilterBox"
+                  Width="150"
+                  DisplayMemberPath="NazwaTypu"
+                  SelectedValuePath="Id" SelectionChanged="TestTypeFilterBox_SelectionChanged" />
+            </StackPanel>
+
+            <!-- Status -->
+            <StackPanel Grid.Column="4"
+                Orientation="Horizontal">
+
+                <TextBlock Text="Status:"
+                   VerticalAlignment="Center"
+                   Margin="0,0,8,0" />
+
+                <ComboBox x:Name="StatusFilterBox"
+                  Width="130" SelectionChanged="StatusFilterBox_SelectionChanged">
+
+                    <ComboBoxItem Content="Wszystkie"
+                          IsSelected="True" />
+
+                    <ComboBoxItem Content="Aktywne" />
+
+                    <ComboBoxItem Content="Zarchiwizowane" />
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Data utworzenia -->
+            <StackPanel Grid.Column="6"
+                Orientation="Horizontal">
+
+                <TextBlock Text="Data utworzenia:"
+                   VerticalAlignment="Center"
+                   Margin="0,0,8,0" />
+
+                <DatePicker x:Name="CreationDateFilterPicker"
+                    Width="130" SelectedDateChanged="CreationDateFilterPicker_SelectedDateChanged" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Wyszukiwanie -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,0,10">
+
+            <TextBlock Text="Szukaj:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,8,0" />
+
+            <TextBox x:Name="SearchTextBox"
+                     Width="260"
+                     Height="30"
+                     Margin="0,0,10,0"
+                     VerticalContentAlignment="Center"
+                     ToolTip="Szukaj po tytule, typie testu, autorze lub statusie" TextChanged="SearchTextBox_TextChanged" />
+
+            <Button Content="Odśwież"
+                    Width="90"
+                    Height="30"
+                    Click="Refresh_Click" />
+        </StackPanel>
+
+        <!-- Licznik testów -->
+        <TextBlock x:Name="TestsCountTextBlock"
+                   Grid.Row="3"
+                   Text="Liczba testów: 0"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,0,10"
+                   FontWeight="SemiBold" />
+
+        <!-- Lista testów -->
+        <DataGrid x:Name="TestsGrid"
+                  Grid.Row="4"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="True"
+                  ColumnWidth="*"
+                  HeadersVisibility="Column"
+                  HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  GridLinesVisibility="Horizontal"
+                  RowHeaderWidth="0"
+                  MinColumnWidth="60">
+
+            <DataGrid.Columns>
+
+                <!-- Tytuł -->
+                <DataGridTextColumn Header="Tytuł"
+                                    Binding="{Binding Tytul}"
+                                    Width="2.4*"
+                                    MinWidth="190" />
+
+                <!-- Typ testu -->
+                <DataGridTextColumn Header="Typ"
+                                    Binding="{Binding Typ}"
+                                    Width="1.2*"
+                                    MinWidth="115">
+
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment"
+                                    Value="Center" />
+                            <Setter Property="VerticalAlignment"
+                                    Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Liczba pytań -->
+                <DataGridTextColumn Header="Liczba pytań"
+                                    Binding="{Binding LiczbaPytan}"
+                                    Width="0.8*"
+                                    MinWidth="90">
+
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment"
+                                    Value="Center" />
+                            <Setter Property="VerticalAlignment"
+                                    Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Czas -->
+                <DataGridTextColumn Header="Czas"
+                                    Binding="{Binding CzasTrwaniaMinuty,
+                                                      StringFormat={}{0} min}"
+                                    Width="0.7*"
+                                    MinWidth="80">
+
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment"
+                                    Value="Center" />
+                            <Setter Property="VerticalAlignment"
+                                    Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Próg -->
+                <DataGridTextColumn Header="Próg"
+                                    Binding="{Binding Prog,
+                                                      StringFormat={}{0}%}"
+                                    Width="0.7*"
+                                    MinWidth="75">
+
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment"
+                                    Value="Center" />
+                            <Setter Property="VerticalAlignment"
+                                    Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Autor -->
+                <DataGridTextColumn x:Name="AuthorColumn"
+                                    Header="Autor"
+                                    Binding="{Binding Autor}"
+                                    Width="1.3*"
+                                    MinWidth="125" />
+
+                <!-- Data utworzenia -->
+                <DataGridTextColumn Header="Data utworzenia"
+                                    Binding="{Binding DataUtworzenia,
+                                                      StringFormat=dd.MM.yyyy}"
+                                    Width="1*"
+                                    MinWidth="105">
+
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextAlignment"
+                                    Value="Center" />
+                            <Setter Property="VerticalAlignment"
+                                    Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- Edycja testu -->
+                <DataGridTemplateColumn Header="Test"
+                                        Width="Auto"
+                                        MinWidth="95">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Edytuj"
+                                    MinWidth="78"
+                                    Height="28"
+                                    Margin="4,2"
+                                    Padding="10,2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    IsEnabled="{Binding CzyMoznaEdytowac}"
+                                    Click="EditTest_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Rozwiązywanie próbne -->
+                <DataGridTemplateColumn Header="Rozwiąż próbnie"
+                                        Width="Auto"
+                                        MinWidth="125">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Rozwiąż"
+                                    MinWidth="88"
+                                    Height="28"
+                                    Margin="4,2"
+                                    Padding="10,2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    IsEnabled="{Binding CzyMoznaRozwiazacProbnie}"
+                                    Click="SolveTestTrial_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Archiwizacja -->
+                <DataGridTemplateColumn Header="Archiwizacja"
+                                        Width="Auto"
+                                        MinWidth="120">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="{Binding ArchiveButtonText}"
+                                    MinWidth="100"
+                                    Height="28"
+                                    Margin="4,2"
+                                    Padding="10,2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Click="ArchiveOrRestore_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- Usuwanie -->
+                <DataGridTemplateColumn x:Name="DeleteColumn"
+                                        Header="Usuń"
+                                        Width="Auto"
+                                        MinWidth="90">
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Usuń"
+                                    MinWidth="72"
+                                    Height="28"
+                                    Margin="4,2"
+                                    Padding="10,2"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    IsEnabled="{Binding CzyZarchiwizowany}"
+                                    Click="DeleteTest_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Przycisk dolny -->
+        <StackPanel Grid.Row="5"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+            <Button Content="Wróć"
+                    Width="130"
+                    Height="40"
+                    Margin="10"
+                    Click="Back_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>

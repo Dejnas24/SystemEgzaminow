@@ -1,0 +1,290 @@
+﻿<UserControl x:Class="SystemEgzaminow.WPF.Views.Tests.TestSessionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SystemEgzaminow.WPF.Views.Tests"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="24">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- GÓRNY PANEL -->
+        <Grid Grid.Row="0"
+              Margin="0,0,0,18">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Informacja o aktualnym pytaniu -->
+            <StackPanel Grid.Column="0">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="Pytanie "
+                               FontSize="24"
+                               FontWeight="SemiBold" />
+
+                    <TextBlock x:Name="CurrentQuestionNumberTextBlock"
+                               Text="1"
+                               FontSize="24"
+                               FontWeight="SemiBold" />
+
+                    <TextBlock Text=" z "
+                               FontSize="24"
+                               FontWeight="SemiBold" />
+
+                    <TextBlock x:Name="QuestionsCountTextBlock"
+                               Text="20"
+                               FontSize="24"
+                               FontWeight="SemiBold" />
+                </StackPanel>
+
+                <TextBlock x:Name="QuestionPointsTextBlock"
+                           Text="Liczba punktów: 3"
+                           Margin="0,6,0,0"
+                           FontSize="14" />
+            </StackPanel>
+
+            <!-- Timer -->
+            <Border Grid.Column="1"
+                    Padding="18,10"
+                    BorderBrush="#D1D5DB"
+                    BorderThickness="1"
+                    CornerRadius="6"
+                    VerticalAlignment="Top">
+
+                <StackPanel Orientation="Horizontal">
+
+                    <TextBlock Text="Pozostały czas:"
+                               Margin="0,0,10,0"
+                               FontSize="15"
+                               VerticalAlignment="Center" />
+
+                    <TextBlock x:Name="RemainingTimeTextBlock"
+                               Text="00:00:00"
+                               FontSize="24"
+                               FontWeight="Normal"
+                               Foreground="Green"
+                               VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- GŁÓWNA KARTA PYTANIA -->
+        <Border Grid.Row="1"
+                Padding="24"
+                BorderBrush="#D1D5DB"
+                BorderThickness="1"
+                CornerRadius="8">
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+
+                <StackPanel>
+
+                    <!-- Treść pytania -->
+                    <TextBlock Text="Treść pytania"
+                               FontSize="13"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,6" />
+
+                    <TextBlock x:Name="QuestionContentTextBlock"
+                               Text="Tutaj zostanie wyświetlona treść aktualnego pytania."
+                               FontSize="20"
+                               FontWeight="SemiBold"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,20" />
+
+                    <!-- Obraz pytania -->
+                    <Border x:Name="QuestionImageBorder"
+                            Width="520"
+                            MinHeight="220"
+                            MaxHeight="360"
+                            Margin="0,0,0,24"
+                            HorizontalAlignment="Center"
+                            BorderBrush="#D1D5DB"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Visibility="Collapsed">
+
+                        <Image x:Name="QuestionImage"
+                               Stretch="Uniform"
+                               Margin="8" />
+                    </Border>
+
+                    <!-- PYTANIE JEDNOKROTNEGO WYBORU -->
+                    <StackPanel x:Name="SingleChoicePanel"
+                                Visibility="Visible">
+
+                        <TextBlock Text="Wybierz jedną odpowiedź:"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,12" />
+
+                        <ItemsControl x:Name="SingleChoiceAnswersItemsControl">
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Border Padding="12"
+                                            Margin="0,0,0,8"
+                                            BorderBrush="#D1D5DB"
+                                            BorderThickness="1"
+                                            CornerRadius="5">
+
+                                        <RadioButton Content="{Binding Tresc}"
+                                                     IsChecked="{Binding CzyWybrana, Mode=TwoWay}"
+                                                     GroupName="SingleChoiceAnswers"
+                                                     Checked="SingleChoiceRadioButton_Checked"
+                                                     FontSize="15"
+                                                     VerticalContentAlignment="Center" />
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <!-- PYTANIE WIELOKROTNEGO WYBORU -->
+                    <StackPanel x:Name="MultipleChoicePanel"
+                                Visibility="Collapsed">
+
+                        <TextBlock Text="Wybierz wszystkie poprawne odpowiedzi:"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,12" />
+
+                        <ItemsControl x:Name="MultipleChoiceAnswersItemsControl">
+
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Border Padding="12"
+                                            Margin="0,0,0,8"
+                                            BorderBrush="#D1D5DB"
+                                            BorderThickness="1"
+                                            CornerRadius="5">
+
+                                        <CheckBox Content="{Binding Tresc}"
+                                                  IsChecked="{Binding CzyWybrana, Mode=TwoWay}"
+                                                  Checked="MultipleChoiceCheckBox_Changed"
+                                                  Unchecked="MultipleChoiceCheckBox_Changed"
+                                                  FontSize="15"
+                                                  VerticalContentAlignment="Center" />
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <!-- PYTANIE OTWARTE -->
+                    <StackPanel x:Name="OpenAnswerPanel"
+                                Visibility="Collapsed">
+
+                        <TextBlock Text="Podaj odpowiedź:"
+                                   FontSize="15"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,12" />
+
+                        <TextBox x:Name="OpenAnswerTextBox"
+                                 Text="{Binding TrescOdpowiedziUcznia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 MinHeight="150"
+                                 MaxHeight="320"
+                                 Padding="12"
+                                 FontSize="15"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Auto" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- DOLNA BELKA -->
+        <StackPanel Grid.Row="2"
+                    Margin="0,20,0,0"
+                    HorizontalAlignment="Center">
+
+            <!-- Przyciski nawigacyjne -->
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+
+                <Button x:Name="FirstQuestionButton"
+                        Content="|&lt;"
+                        Width="70"
+                        Height="42"
+                        Margin="0,0,8,0"
+                        ToolTip="Pierwsze pytanie"
+                        Click="FirstQuestionButton_Click" />
+
+                <Button x:Name="PreviousQuestionButton"
+                        Content="&lt;"
+                        Width="70"
+                        Height="42"
+                        Margin="0,0,8,0"
+                        ToolTip="Poprzednie pytanie"
+                        Click="PreviousQuestionButton_Click" />
+
+                <Button x:Name="NextQuestionButton"
+                        Content="&gt;"
+                        Width="70"
+                        Height="42"
+                        Margin="0,0,8,0"
+                        ToolTip="Następne pytanie"
+                        Click="NextQuestionButton_Click" />
+
+                <Button x:Name="LastQuestionButton"
+                        Content="&gt;|"
+                        Width="70"
+                        Height="42"
+                        Margin="0,0,20,0"
+                        ToolTip="Ostatnie pytanie"
+                        Click="LastQuestionButton_Click" />
+
+                <Button x:Name="FinishTestButton"
+                        Content="Zakończ test"
+                        Width="150"
+                        Height="42"
+                        FontWeight="SemiBold" Click="FinishTestButton_Click" />
+            </StackPanel>
+
+            <!-- Opcjonalna informacja pod nawigacją -->
+            <TextBlock x:Name="NavigationInformationTextBlock"
+                       Text="Możesz wracać do poprzednich pytań."
+                       Margin="0,12,0,0"
+                       HorizontalAlignment="Center"
+                       FontSize="13"
+                       Foreground="Gray"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap"
+                       Visibility="Collapsed" />
+        </StackPanel>
+
+        <!-- MIGAWKA -->
+        <Border x:Name="SaveNotificationBorder"
+                Grid.RowSpan="3"
+                Padding="18,11"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Margin="0,0,0,90"
+                BorderBrush="#B8B8B8"
+                BorderThickness="1"
+                CornerRadius="7"
+                Background="White"
+                Panel.ZIndex="10"
+                Visibility="Collapsed">
+
+            <TextBlock x:Name="SaveNotificationTextBlock"
+                       Text="Odpowiedź zapisana"
+                       FontSize="14"
+                       FontWeight="SemiBold" />
+        </Border>
+    </Grid>
+</UserControl>

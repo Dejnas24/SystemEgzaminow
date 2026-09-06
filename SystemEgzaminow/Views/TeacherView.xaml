@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="SystemEgzaminow.WPF.Views.TeacherView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SystemEgzaminow.WPF.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <TextBlock Text="Panel nauczyciela"
+                   FontSize="26"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"
+                   Grid.Row="0" />
+
+        <!-- Sekcje -->
+        <UniformGrid Grid.Row="1"
+                     Columns="4"
+                     Margin="0,0,0,20">
+
+            <!-- TESTY -->
+            <Border BorderBrush="Gray"
+                    BorderThickness="1"
+                    Margin="5"
+                    Padding="8"
+                    CornerRadius="6">
+
+                <StackPanel>
+                    <TextBlock Text="Testy"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,15" />
+
+                    <Button Content="Dodaj test"
+                            Height="40"
+                            Margin="0,5"
+                            Click="AddTest_Click" />
+
+                    <Button Content="Lista testów"
+                            Height="40"
+                            Margin="0,5"
+                            Click="TestList_Click" />
+                </StackPanel>
+            </Border>
+
+            <!-- PYTANIA -->
+            <Border BorderBrush="Gray"
+                    BorderThickness="1"
+                    Margin="5"
+                    Padding="8"
+                    CornerRadius="6">
+
+                <StackPanel>
+                    <TextBlock Text="Pytania"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,15" />
+
+                    <Button Content="Dodaj pytanie"
+                            Height="40"
+                            Margin="0,5"
+                            Click="AddQuestions_Click" />
+
+                    <Button Content="Edytuj pytanie"
+                            Height="40"
+                            Margin="0,5"
+                            Click="EditQuestions_Click" />
+                </StackPanel>
+            </Border>
+
+            <!-- ROZWIĄZYWANIE -->
+            <Border BorderBrush="Gray"
+                    BorderThickness="1"
+                    Margin="5"
+                    Padding="8"
+                    CornerRadius="6">
+
+                <StackPanel>
+                    <TextBlock Text="Rozwiązywanie"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,15" />
+
+                    <Button Content="Przypisz testy"
+                            Height="40"
+                            Margin="0,5"
+                            Click="AssignTests_Click" />
+
+                    <Button Content="Wyniki testów"
+                            Height="40"
+                            Margin="0,5"
+                            Click="TestResults_Click" />
+                    <Button Content="Skala ocen"
+        Height="40"
+        Margin="0,5"
+        Click="GradeScale_Click" />
+                </StackPanel>
+            </Border>
+
+            <!-- RAPORTY -->
+            <Border BorderBrush="Gray"
+                    BorderThickness="1"
+                    Margin="5"
+                    Padding="8"
+                    CornerRadius="6">
+
+                <StackPanel>
+                    <TextBlock Text="Raporty"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,15" />
+
+                    <Button Content="Raport rozwiązywania"
+                            Height="40"
+                            Margin="0,5"
+                            Click="SolveReport_Click" />
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+
+        <!-- Przyciski dolne -->
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+            <Button Content="Wyloguj"
+                    Width="130"
+                    Height="40"
+                    Margin="10"
+                    Click="Logout_Click" />
+
+            <Button Content="Zamknij"
+                    Width="130"
+                    Height="40"
+                    Margin="10"
+                    Click="Close_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>

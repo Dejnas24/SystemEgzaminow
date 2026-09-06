@@ -1,0 +1,125 @@
+﻿<Window x:Class="SystemEgzaminow.WPF.Windows.Tests.AssignQuestionToTestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SystemEgzaminow.WPF.Windows.Tests"
+        mc:Ignorable="d"
+         Title="Przypisz pytanie" Height="560"
+        Width="920"
+        MinHeight="500"
+        MinWidth="820"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="15" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <TextBlock Grid.Row="0"
+                   Text="Przypisz pytanie"
+                   FontSize="28"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center" />
+
+        <!-- Wyszukiwanie -->
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="120" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="Szukaj:"
+                       FontSize="16"
+                       FontWeight="SemiBold"
+                       VerticalAlignment="Center"
+                       Margin="0,0,12,0" />
+
+            <TextBox x:Name="SearchTextBox"
+                     Grid.Column="1"
+                     Height="38"
+                     FontSize="15"
+                     Padding="8,4"
+                     VerticalContentAlignment="Center" TextChanged="SearchTextBox_TextChanged" />
+
+            <Button x:Name="RefreshButton"
+                    Grid.Column="3"
+                    Content="Odśwież"
+                    Height="38"
+                    FontSize="15"
+                    Click="RefreshButton_Click" />
+        </Grid>
+
+        <!-- Lista pytań -->
+        <DataGrid x:Name="QuestionsDataGrid"
+                  Grid.Row="4"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow"
+                  FontSize="14"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="Horizontal"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto"
+                  MouseDoubleClick="QuestionsDataGrid_MouseDoubleClick">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="Treść pytania"
+                                    Binding="{Binding TrescPytania}"
+                                    Width="*"
+                                    MinWidth="420" />
+
+                <DataGridTextColumn Header="Typ"
+                                    Binding="{Binding TypPytania}"
+                                    Width="190" />
+
+                <DataGridTextColumn Header="Punkty"
+                                    Binding="{Binding LiczbaPunktow}"
+                                    Width="100" />
+
+                <DataGridTextColumn Header="Autor"
+                                    Binding="{Binding AutorPelnaNazwa}"
+                                    Width="170" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Przyciski -->
+        <StackPanel Grid.Row="6"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+            <Button x:Name="AssignQuestionButton"
+                    Content="Przypisz pytanie"
+                    Width="180"
+                    Height="46"
+                    FontSize="16"
+                    Margin="8"
+                    Click="AssignQuestionButton_Click" />
+
+            <Button x:Name="CancelButton"
+                    Content="Anuluj"
+                    Width="180"
+                    Height="46"
+                    FontSize="16"
+                    Margin="8"
+                    Click="CancelButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

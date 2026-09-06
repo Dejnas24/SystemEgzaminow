@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="SystemEgzaminow.WPF.Views.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SystemEgzaminow.WPF.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Border Width="300" Height="200" BorderBrush="Yellow" Background="LightYellow" BorderThickness="2"
+        HorizontalAlignment="Center" VerticalAlignment="Center"
+        Padding="40,10">
+
+            <StackPanel>
+
+                <TextBlock Text="Login" />
+                <TextBox x:Name="txtLogin" Margin="0,5,0,10" />
+
+                <TextBlock Text="Hasło" />
+                <PasswordBox x:Name="txtHaslo" Margin="0,5,0,30" />
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Zaloguj" Width="80" Margin="5" Click="Login_Click" />
+                    <Button Content="Zamknij" Width="80" Margin="5" Click="Close_Click" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

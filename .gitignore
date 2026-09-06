@@ -1,0 +1,18 @@
+# Visual Studio
+.vs/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# User-specific Visual Studio files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Local database configuration - DO NOT COMMIT
+databaseSettings.json
+
+# Logs
+*.log

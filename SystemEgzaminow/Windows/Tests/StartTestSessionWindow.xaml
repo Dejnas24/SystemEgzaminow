@@ -1,0 +1,153 @@
+﻿<Window x:Class="SystemEgzaminow.WPF.Windows.Tests.StartTestSessionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rozpoczęcie testu"
+        Width="900"
+        Height="550"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+ShowInTaskbar="False">
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <StackPanel Grid.Row="0"
+                    Margin="0,0,0,20">
+
+            <TextBlock Text="Rozpoczęcie testu"
+                       FontSize="26"
+                       FontWeight="SemiBold"
+                       Foreground="#1F2937" />
+
+            <TextBlock Text="Przed rozpoczęciem zapoznaj się z informacjami o teście."
+                       Margin="0,6,0,0"
+                       FontSize="14"
+                       Foreground="#6B7280" />
+        </StackPanel>
+
+        <!-- Główna karta -->
+        <Border Grid.Row="1"
+                Background="White"
+                CornerRadius="10"
+                Padding="24"
+                BorderBrush="#D1D5DB"
+                BorderThickness="1">
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+
+                    <!-- Tytuł testu -->
+                    <TextBlock Text="Tytuł testu"
+                               FontSize="13"
+                               Foreground="#6B7280" />
+
+                    <TextBlock x:Name="TestTitleTextBlock"
+                               Text="Przykładowy tytuł testu"
+                               Margin="0,4,0,22"
+                               FontSize="22"
+                               FontWeight="SemiBold"
+                               Foreground="#111827"
+                               TextWrapping="Wrap" />
+
+                    <!-- Dane testu -->
+                    <Grid Margin="0,0,0,22">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="Czas trwania:"
+                                   Margin="0,6"
+                                   FontWeight="SemiBold" />
+
+                        <TextBlock x:Name="DurationTextBlock"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="30 minut"
+                                   Margin="0,6" />
+
+                        <TextBlock Grid.Row="1"
+                                   Grid.Column="0"
+                                   Text="Maksymalna liczba punktów:"
+                                   Margin="0,6"
+                                   FontWeight="SemiBold" />
+
+                        <TextBlock x:Name="MaximumPointsTextBlock"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   Text="20 punktów"
+                                   Margin="0,6" />
+
+                        <TextBlock Grid.Row="2"
+                                   Grid.Column="0"
+                                   Text="Próg zaliczenia:"
+                                   Margin="0,6"
+                                   FontWeight="SemiBold" />
+
+                        <TextBlock x:Name="PassingThresholdTextBlock"
+                                   Grid.Row="2"
+                                   Grid.Column="1"
+                                   Text="60%"
+                                   Margin="0,6" />
+                    </Grid>
+
+                    <!-- Informacja nauczyciela -->
+                    <Border x:Name="TeacherInformationBorder"
+
+                            BorderBrush="#BFDBFE"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="16">
+
+                        <StackPanel>
+                            <TextBlock Text="Informacja od nauczyciela"
+                                       FontSize="14"
+                                       FontWeight="SemiBold"
+                                       Foreground="#1E3A8A" />
+
+                            <TextBlock x:Name="TeacherInformationTextBlock"
+                                       Text="Proszę dokładnie czytać wszystkie pytania."
+                                       Margin="0,8,0,0"
+                                       FontSize="14"
+                                       Foreground="#1F2937"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Przyciski -->
+        <StackPanel Grid.Row="2"
+                    Margin="0,20,0,0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+            <Button x:Name="CancelButton"
+                    Content="Anuluj"
+                    Width="120"
+                    Height="42"
+                    Margin="0,0,12,0" Click="CancelButton_Click" />
+
+            <Button x:Name="StartButton"
+                    Content="Rozpocznij test"
+                    Width="160"
+                    Height="42"
+                    FontWeight="SemiBold"
+                    IsDefault="True" Click="StartButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

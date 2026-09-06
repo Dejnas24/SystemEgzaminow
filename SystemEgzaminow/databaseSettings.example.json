@@ -1,0 +1,3 @@
+{
+  "ConnectionString": "Server=YOUR_SERVER;Database=EgzaminyTestyDb_PL;User Id=YOUR_USER;Password=YOUR_PASSWORD;TrustServerCertificate=True;"
+}

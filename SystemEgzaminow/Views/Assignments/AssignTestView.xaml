@@ -1,0 +1,312 @@
+﻿<UserControl x:Class="SystemEgzaminow.WPF.Views.Assignments.AssignTestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:SystemEgzaminow.WPF.Views.Assignments"
+             mc:Ignorable="d"
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="AssignTestView_Loaded">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Nagłówek -->
+        <TextBlock Grid.Row="0"
+                   Text="Przypisz test"
+                   FontSize="28"
+                   FontWeight="SemiBold"
+                   Margin="0,0,0,20"
+                   HorizontalAlignment="Center" />
+
+        <!-- Informacje startowa / końcowa -->
+        <Grid Grid.Row="1"
+              Margin="0,0,0,18">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Informacja przed rozpoczęciem testu"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,6" />
+
+                <TextBox x:Name="StartInfoTextBox"
+                         MinHeight="90"
+                         Padding="10"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="Informacja po zakończeniu testu"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,6" />
+
+                <TextBox x:Name="EndInfoTextBox"
+                         MinHeight="90"
+                         Padding="10"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Ustawienia przypisania -->
+        <!-- Ustawienia przypisania -->
+        <Border Grid.Row="2"
+        Padding="16"
+        BorderBrush="#D1D5DB"
+        BorderThickness="1"
+        Margin="0,0,0,18">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Daty + liczba prób + status -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="180" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="220" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Dostępny od"
+               FontWeight="SemiBold"
+               Margin="0,0,0,6" />
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="70" />
+                            </Grid.ColumnDefinitions>
+
+                            <DatePicker x:Name="AvailableFromDatePicker" Grid.Column="0" />
+
+                            <ComboBox x:Name="AvailableFromHourComboBox" Grid.Column="2" Height="30" />
+                            <TextBlock Grid.Column="3" Text=":"  FontSize="18" FontWeight="SemiBold"  HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                            <ComboBox x:Name="AvailableFromMinuteComboBox" Grid.Column="4" Height="30" />
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Dostępny do"
+               FontWeight="SemiBold"
+               Margin="0,0,0,6" />
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="10" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="20" />
+                                <ColumnDefinition Width="70" />
+                            </Grid.ColumnDefinitions>
+
+                            <DatePicker x:Name="AvailableToDatePicker"  Grid.Column="0" />
+
+                            <ComboBox x:Name="AvailableToHourComboBox"  Grid.Column="2" Height="30" />
+                            <TextBlock Grid.Column="3" Text=":"  FontSize="18" FontWeight="SemiBold"  HorizontalAlignment="Center"  VerticalAlignment="Center" />
+
+                            <ComboBox x:Name="AvailableToMinuteComboBox" Grid.Column="4" Height="30" />
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="4">
+                        <TextBlock Text="Liczba prób"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,6" />
+
+                        <TextBox x:Name="AttemptsTextBox"
+                         Text="1"
+                         Padding="8" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="6">
+                        <TextBlock Text="Status"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,6" />
+
+                        <ComboBox x:Name="StatusComboBox"
+                          Height="34" />
+                    </StackPanel>
+                </Grid>
+
+                <!-- Sposób oceniania + sposób wyświetlania -->
+                <Grid Grid.Row="1"
+              Margin="0,16,0,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Sposób oceniania"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,8" />
+
+                        <ComboBox x:Name="ScoringModeComboBox"
+                          Width="300"
+                          HorizontalAlignment="Left" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="Sposób wyświetlania wyniku"
+                           FontWeight="SemiBold"
+                           Margin="0,0,0,8" />
+
+                        <ComboBox x:Name="ResultDisplayModeComboBox"
+                          Width="300"
+                          HorizontalAlignment="Left" />
+                    </StackPanel>
+
+                    <!-- Udostępnienie wyniku -->
+                    <StackPanel Grid.Column="4">
+
+                        <TextBlock Text="Udostępnienie wyniku"
+       FontWeight="SemiBold"
+       Margin="0,0,0,10" />
+
+                        <CheckBox x:Name="ShowResultAfterFinishCheckBox"
+      Content="Pokaż wynik bezpośrednio po zakończeniu testu" />
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <!-- Dwie tabele -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Testy -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ComboBox x:Name="TestTypeComboBox"
+                          Grid.Row="0"
+                          Margin="0,0,0,10"
+                          Height="34"
+                          SelectionChanged="TestTypeComboBox_SelectionChanged" />
+
+                <DataGrid x:Name="TestsDataGrid"
+                          Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          SelectionMode="Extended"
+                          SelectionUnit="FullRow">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nazwa testu"
+                                            Binding="{Binding Tytul}"
+                                            Width="*" />
+
+                        <DataGridTextColumn Header="Typ"
+                                            Binding="{Binding TypTestu}"
+                                            Width="160" />
+
+                        <DataGridTextColumn Header="Liczba pytań"
+                                            Binding="{Binding LiczbaPytan}"
+                                            Width="110" />
+
+                        <DataGridTextColumn Header="Czas"
+                                            Binding="{Binding CzasTrwaniaMinuty}"
+                                            Width="90" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!-- Środek -->
+            <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="→"
+                           FontSize="28"
+                           Margin="0,4" />
+            </StackPanel>
+
+            <!-- Odbiorcy -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ComboBox x:Name="RecipientTypeComboBox"
+                          Grid.Row="0"
+                          Margin="0,0,0,10"
+                          Height="34"
+                          SelectionChanged="RecipientTypeComboBox_SelectionChanged" />
+
+                <DataGrid x:Name="RecipientsDataGrid"
+                          Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True"
+                          SelectionMode="Extended"
+                          SelectionUnit="FullRow">
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nazwa"
+                                            Binding="{Binding Nazwa}"
+                                            Width="*" />
+
+                        <DataGridTextColumn Header="Login"
+                                            Binding="{Binding Login}"
+                                            Width="170" />
+
+                        <DataGridTextColumn Header="Klasa / grupa"
+                                            Binding="{Binding KlasaGrupa}"
+                                            Width="170" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+
+        <!-- Przyciski -->
+        <StackPanel Grid.Row="4"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0">
+
+            <Button x:Name="AssignTestButton"
+                    Content="Przypisz test"
+                    Width="150"
+                    Height="42"
+                    Margin="0,0,12,0"
+                    Click="AssignTestButton_Click" />
+
+            <Button x:Name="CancelButton"
+                    Content="Anuluj"
+                    Width="120"
+                    Height="42"
+                     Click="CancelButton_Click" />
+        </StackPanel>
+    </Grid>
+</UserControl>
