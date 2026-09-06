@@ -1,4 +1,5 @@
 # System Egzaminów
+[English](README.md) | Polski
 
 System Egzaminów to aplikacja desktopowa przeznaczona do tworzenia,
 przypisywania i przeprowadzania testów, sprawdzianów, kartkówek, kolokwiów oraz egzaminów i innych.
