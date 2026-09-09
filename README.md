@@ -1,4 +1,5 @@
 # Examination System
+English | [Polski](README_PL.md)
 
 Examination System is a desktop application designed for creating,
 assigning and conducting tests, quizzes, assessments, midterm exams, final exams and other forms of examination.
