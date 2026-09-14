@@ -189,6 +189,11 @@ namespace SystemEgzaminow
             MainContent.Content = new GradeScaleView(roleId);
         }
 
+        public void ShowTestResultsView(int roleId)
+        {
+            MainContent.Content = new TestResultsView(roleId);
+        }
+
         public async Task EndCurrentSessionAsync()
         {
             if (LoggedUser.LoginLogId.HasValue)

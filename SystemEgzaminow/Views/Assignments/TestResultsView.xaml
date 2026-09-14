@@ -1,0 +1,498 @@
+﻿<UserControl x:Class="SystemEgzaminow.WPF.Views.Assignments.TestResultsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SystemEgzaminow.WPF.Views.Assignments"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="TestResult_Loaded">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="20">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Tytuł -->
+            <TextBlock Text="Wyniki testów"
+               FontSize="26"
+               FontWeight="Bold"
+               HorizontalAlignment="Center"
+               Margin="0,0,0,20"
+               Grid.Row="0" />
+
+            <!--Ramka edycja dla klasy-->
+            <GroupBox Header="Edycja testu dla klasy"
+                   Grid.Row="1"
+                  Margin="0,0,0,15">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center"  Margin="0,5,0,15">
+                        <TextBlock Text="Klasa/Rok szkolny:"
+                            VerticalAlignment="Center"
+                            Margin="0,0,5,0"  />
+
+                        <ComboBox x:Name="ClassFilterBox"
+                            Width="150"
+                            Margin="0,0,15,0"
+                            SelectionChanged="ClassFilterBox_SelectionChanged">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                <Run Text="{Binding Nazwa}" />
+                <Run Text=" - " />
+                <Run Text="{Binding KlasaGrupa}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+
+
+
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="0,5,0,15">
+                        <TextBlock Text="Typ testu:"
+                            VerticalAlignment="Center"
+                            Margin="0,0,5,0"  />
+
+                        <ComboBox x:Name="TestTypeFilterBox"
+                                  IsEditable="False"
+                            Width="150"
+                            Margin="0,0,15,0"
+                            SelectionChanged="TestTypeFilterBox_SelectionChanged">
+
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NazwaTypu}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Margin="0,5,0,15">
+
+                        <TextBlock Text="Nazwa testu:"
+                            VerticalAlignment="Center"
+                            Margin="0,0,5,0" />
+
+                        <ComboBox x:Name="TestNameFilterBox"
+                                  IsEditable="False"
+                            Width="150"
+                            Margin="0,0,15,0"
+                            SelectionChanged="TestNameFilterBox_SelectionChanged">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Tytul}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,0,15">
+
+                        <TextBlock Text="Edytuj przypisanie klasy:"
+            VerticalAlignment="Center"
+            Margin="0,0,5,0" />
+
+                        <Button Content="Edytuj"
+MinWidth="78"
+Height="28"
+Margin="4,2"
+Padding="10,2"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+IsEnabled="{Binding CzyMoznaEdytowacKlase}"
+Click="EditClassAssignment_Click" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,15">
+
+                        <TextBlock Text="Zakończ test:"
+            VerticalAlignment="Center"
+            Margin="0,0,5,0"/>
+                        <Button Content="Zakończ"
+MinWidth="78"
+Height="28"
+Margin="4,2"
+Padding="10,2"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+IsEnabled="{Binding CzyMoznaZakonczycTestKlasy}"
+Click="CloseTestStudent_Click" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,15">
+                        <TextBlock Text="Opublikuj wyniki:"
+            VerticalAlignment="Center"
+            Margin="0,0,5,0" />
+
+                        <Button Content="Opublikuj"
+MinWidth="78"
+Height="28"
+Margin="4,2"
+Padding="10,2"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+IsEnabled="{Binding CzyMoznaOpublikowacTestKlasy}"
+Click="PublishTest_Click" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,0,15">
+
+                        <TextBlock Text="Eksportuj Excel:"
+            VerticalAlignment="Center"
+            Margin="0,0,5,0"/>
+
+                        <Button Content="Eksportuj"
+MinWidth="78"
+Height="28"
+Margin="4,2"
+Padding="10,2"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+IsEnabled="{Binding CzyArchiwizowanoKlase}"
+Click="ExportTestExcel_Click" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Margin="0,0,0,15">
+
+                        <TextBlock Text="Eksportuj PDF:"
+            VerticalAlignment="Center"
+            Margin="0,0,5,0" />
+
+                        <Button Content="Eksportuj"
+MinWidth="78"
+Height="28"
+Margin="4,2"
+Padding="10,2"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+IsEnabled="{Binding CzyMoznaEksportowacKlase}"
+Click="ExportTestPDF_Click" />
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Margin="0,0,0,15">
+
+                        <TextBlock Text="Archiwizuj test:"
+            VerticalAlignment="Center"
+            Margin="0,0,5,0"/>
+
+                        <Button Content="Archiwizuj"
+MinWidth="78"
+Height="28"
+Margin="4,2"
+Padding="10,2"
+HorizontalAlignment="Center"
+VerticalAlignment="Center"
+IsEnabled="{Binding CzyMoznaArchiwizowacKlase}"
+Click="ArchiveTest_Click" />
+                    </StackPanel>
+                </Grid>
+
+            </GroupBox>
+
+
+
+
+            <!-- Filtry -->
+            <StackPanel Grid.Row="2"
+                Orientation="Vertical"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,15">
+
+                <!-- Wiersz 1 -->
+                <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+
+                    <TextBlock Text="Uczeń:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,5,0" />
+
+                    <ComboBox x:Name="StudentFilterBox"
+                      Width="150"
+                      Margin="0,0,15,0"
+                      SelectionChanged="StudentFilterBox_SelectionChanged">
+                    </ComboBox>
+
+                    <TextBlock Text="Data i godzina rozpoczęcia:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,5,0" />
+
+                    <DatePicker x:Name="DateFromPicker"
+                        Width="130"
+                        Margin="0,0,15,0"
+                        SelectedDateChanged="DateFromPicker_SelectedDateChanged" />
+
+                    <TextBlock Text="Data godzina zakończenia:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,5,0" />
+
+                    <DatePicker x:Name="DateToPicker"
+                        Width="130"
+                        SelectedDateChanged="DateToPicker_SelectedDateChanged" />
+                </StackPanel>
+
+                <!-- Wiersz 2 -->
+                <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,10,0,0">
+
+                    <TextBlock Text="Wyszukaj:"
+                       VerticalAlignment="Center"
+                       Margin="0,0,5,0" />
+
+                    <TextBox x:Name="SearchBox"
+                     Width="300"
+                     Height="26"
+                     TextChanged="SearchBox_TextChanged" />
+
+                    <Button Content="Odśwież"
+                    Width="100"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    Click="Refresh_Click" />
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Tabela -->
+            <DataGrid x:Name="TestResultsGrid"
+              Grid.Row="3"
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
+              CanUserResizeColumns="True"
+              CanUserSortColumns="True"
+              IsReadOnly="True"
+              RowHeaderWidth="0"
+              RowHeight="36"
+              ColumnHeaderHeight="34"
+              GridLinesVisibility="Horizontal"
+              HorizontalScrollBarVisibility="Auto"
+              VerticalScrollBarVisibility="Auto"
+              Margin="0,0,0,20"
+                      MinHeight="150">
+
+                <DataGrid.Columns>
+
+                    <DataGridTextColumn Header="Imię i nazwisko ucznia"
+                                Binding="{Binding ImieNazwisko}"
+                                Width="2*"
+                                MinWidth="160">
+
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment"
+                                Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Data godzina rozpoczęcia"
+                                Binding="{Binding DataGodzinaRozpoczencia}"
+                                Width="1.4*"
+                                MinWidth="140">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment"
+        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+
+
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Data i godzina zakończenia"
+                 Binding="{Binding DataGodzinaZakonczenia}"
+                 Width="1.4*"
+                 MinWidth="140" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment"
+        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Liczba punktów"
+                                Binding="{Binding LiczbaPunktow}"
+                                Width="100"
+                                        MinWidth="90">
+
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment"
+        Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Procent"
+                                Binding="{Binding Procent}"
+                                Width="80"
+                                MinWidth="90">
+
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment"
+                                Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Ocena"
+                                Binding="{Binding Ocena}"
+                                Width="70"
+                                MinWidth="60">
+
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment"
+                                Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Czy zdał?"
+                                Binding="{Binding CzyZdalTekst}"
+                                Width="85"
+                                MinWidth="75">
+
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment"
+                                Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTemplateColumn Header="Edytuj test"
+                                Width="95"
+                                            MinWidth="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edytuj"
+                MinWidth="78"
+                Height="28"
+                Margin="4,2"
+                Padding="10,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsEnabled="{Binding CzyMoznaEdytowac}"
+                Click="EditAnswers_Click" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Zakończ test"
+                                Width="95"
+                                            MinWidth="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Zakończ"
+                MinWidth="78"
+                Height="28"
+                Margin="4,2"
+                Padding="10,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsEnabled="{Binding CzyMoznaZakonczyc}"
+                Click="CloseTest_Click" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Opublikuj wynik"
+                                Width="95"
+                                            MinWidth="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Opublikuj"
+                MinWidth="78"
+                Height="28"
+                Margin="4,2"
+                Padding="10,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsEnabled="{Binding CzyMoznaOpublikowac}"
+                Click="PublishResults_Click" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Wyniki ucznia"
+                 Width="95"
+                 MinWidth="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Wyniki"
+                MinWidth="78"
+                Height="28"
+                Margin="4,2"
+                Padding="10,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsEnabled="{Binding CzyMoznaWyswietlic}"
+                Click="ResultStudents_Click" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Archiwizuj"
+                Width="95"
+                MinWidth="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Archiwizuj"
+                MinWidth="78"
+                Height="28"
+                Margin="4,2"
+                Padding="10,2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                IsEnabled="{Binding CzyMoznaArchiwizowac}"
+                Click="ArchiveAnswers_Click" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Przyciski -->
+            <StackPanel Grid.Row="4"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center">
+
+                <Button Content="Wróć"
+                Width="160"
+                Height="50"
+                Margin="10"
+                Click="Back_Click" />
+
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

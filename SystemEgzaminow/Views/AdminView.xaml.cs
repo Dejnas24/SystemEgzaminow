@@ -76,7 +76,11 @@ namespace SystemEgzaminow.WPF.Views
 
         private void TestResults_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Funkcjonalność wyników testów będzie dostępna w wersji 1.0.", "Planowana funkcjonalność", MessageBoxButton.OK, MessageBoxImage.Information);
+            var mainWindow = Window.GetWindow(this) as MainWindow;
+            if (mainWindow != null) 
+            {
+                mainWindow.ShowTestResultsView(LoggedUser.RolaId);
+            }
         }
 
         private void LoginReport_Click(object sender, RoutedEventArgs e)

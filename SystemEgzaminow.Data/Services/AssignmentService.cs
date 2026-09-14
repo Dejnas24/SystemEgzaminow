@@ -173,5 +173,29 @@ namespace SystemEgzaminow.Data.Services
                 .Distinct()
                 .ToListAsync();
         }
+
+        public async Task<List<AssignTestListItemDto>> GetByClassAndTypeAsync(int classId, int testTypeId)
+        {
+            return await _context.PrzypisaneTesty
+      .AsNoTracking()
+      .Where(pt => pt.KlasaId == classId &&
+                   pt.Test.IdTypuTestu == testTypeId)
+      .Select(pt => new
+      {
+          pt.TestId,
+          pt.Test.Tytul,
+          TypTestu = pt.Test.TypTestu.NazwaTypu
+      })
+      .Distinct()
+      .OrderBy(t => t.Tytul)
+      .Select(t => new AssignTestListItemDto
+      {
+          TestId = t.TestId,
+          Tytul = t.Tytul,
+          TypTestu = t.TypTestu
+      })
+      .ToListAsync();
+
+        }
     }
 }

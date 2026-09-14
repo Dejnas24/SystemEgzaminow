@@ -25,5 +25,30 @@ namespace SystemEgzaminow.Data.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task<List<TestTypeDto>> GetByClassAsync(int classId)
+        {
+
+          var typ =  _context.PrzypisaneTesty
+                .AsNoTracking()
+                .Where(pt => pt.KlasaId == classId)
+                .Select(pt => pt.Test.TypTestu)
+                .Distinct();
+
+
+            return await typ
+                .OrderBy(t => t.NazwaTypu)
+                .Select(t => new TestTypeDto
+                {
+                    Id = t.Id,
+                    NazwaTypu = t.NazwaTypu,
+                   
+                    
+                })
+                .ToListAsync();
+        }
+
+
+
     }
 }
